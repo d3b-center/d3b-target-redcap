@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "target-redcap"
-version = "0.0.2"
+version = "0.0.4"
 description = "Singer target for redcap, built with the Meltano Singer SDK."
 readme = "README.md"
 authors = ["Nick Van Kuren <vankurenn@chop.edu>"]

@@ -13,7 +13,7 @@ class redcapSink(BatchSink):
         super().__init__(*args, **kwargs)
         self._client = None
 
-    max_size = 500  # Max records to write in one batch
+    max_size = 100  # Max records to write in one batch
     
     @property
     def client(self) -> REDCapWrapperClient:
