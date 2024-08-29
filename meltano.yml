@@ -1,0 +1,47 @@
+version: 1
+send_anonymous_usage_stats: true
+project_id: target-redcap
+default_environment: test
+environments:
+- name: test
+plugins:
+  extractors:
+  - name: tap-smoke-test
+    variant: meltano
+    pip_url: git+https://github.com/meltano/tap-smoke-test.git
+    config:
+      streams:
+      - stream_name: animals
+        input_filename: 
+          https://raw.githubusercontent.com/meltano/tap-smoke-test/main/demo-data/animals-data.jsonl
+
+  - name: tap-csv
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-csv.git
+    config:
+      files:
+      - entity: redcap_qc_records
+        path: ./test_files/redcap_records.csv
+        keys:
+        - id
+  loaders:
+  - name: target-redcap
+    namespace: target_redcap
+    pip_url: -e .
+    capabilities:
+    - about
+    - stream-maps
+    - record-flattening
+    config:
+      username: ${TARGET_REDCAP_CBTN_USER}
+      base_url: ${TARGET_REDCAP_CBTN_BASE_URL}
+      api_timeout: 1500
+      token: ${TARGET_REDCAP_CBTN_TOKEN}
+      content: record
+      action: import
+      format: json
+      type: eav
+
+
+
+    # TODO: Declare required settings here:
