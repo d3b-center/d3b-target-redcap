@@ -1,9 +1,10 @@
 [tool.poetry]
 name = "target-redcap"
-version = "0.0.4"
+version = "0.0.5"
 description = "Singer target for redcap, built with the Meltano Singer SDK."
 readme = "README.md"
 authors = ["Nick Van Kuren <vankurenn@chop.edu>"]
+maintainers = ["Chris Friedman <friedmanc1@chop.edu>"]
 keywords = [
     "ELT",
     "redcap",
@@ -21,14 +22,14 @@ license = "Apache-2.0"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-singer-sdk = { version="~=0.39.0" }
+singer-sdk = { version="~=0.54.5" }
 fs-s3fs = { version = "~=1.1.1", optional = true }
 requests = "~=2.32.3"
 
 
 [tool.poetry.dev-dependencies]
 pytest = ">=8"
-singer-sdk = { version="~=0.39.0", extras = ["testing"] }
+singer-sdk = { version="~=0.54.5", extras = ["testing"] }
 
 [tool.poetry.extras]
 s3 = ["fs-s3fs"]
