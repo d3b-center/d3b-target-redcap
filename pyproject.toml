@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "target-redcap"
-version = "0.0.5"
+version = "0.1.0"
 description = "Singer target for redcap, built with the Meltano Singer SDK."
 readme = "README.md"
 authors = ["Nick Van Kuren <vankurenn@chop.edu>"]
@@ -12,16 +12,12 @@ keywords = [
 classifiers = [
     "Intended Audience :: Developers",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
 license = "Apache-2.0"
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.12"
 singer-sdk = { version="~=0.54.5" }
 fs-s3fs = { version = "~=1.1.1", optional = true }
 requests = "~=2.32.3"
@@ -38,7 +34,7 @@ s3 = ["fs-s3fs"]
 
 [tool.ruff]
 src = ["target_redcap"]
-target-version = "py38"
+target-version = "py312"
 
 [tool.ruff.lint]
 ignore = [
