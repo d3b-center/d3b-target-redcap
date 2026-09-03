@@ -1,6 +1,5 @@
 """redcap target sink class, which handles writing streams."""
 
-
 from singer_sdk.sinks import BatchSink
 from target_redcap.client import REDCapWrapperClient
 import json
@@ -8,13 +7,13 @@ import json
 
 class redcapSink(BatchSink):
     """redcap target sink class."""
-    
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._client = None
 
     max_size = 100  # Max records to write in one batch
-    
+
     @property
     def client(self) -> REDCapWrapperClient:
         if not self._client:
@@ -32,20 +31,18 @@ class redcapSink(BatchSink):
             context: Stream partition or context dictionary.
         """
         # Instantiate a REDCap API client
-        
+
         records = context["records"]
-        self.logger.info(records)
+        self.logger.info("Processing %s records", len(records))
 
         for record in records:
-            record.pop('id', None)
-        
+            record.pop("id", None)
+
         records = json.dumps(records)
         records_to_submit = json.loads(records)
-        self.logger.info(records_to_submit)
-        
-        self.client.set_records(
-            records_to_submit
-        )
-    
+        self.logger.info("submitting %s records", len(records_to_submit))
+
+        self.client.set_records(records_to_submit)
+
         # Clean up records
-        #context["records"] = []
+        # context["records"] = []
